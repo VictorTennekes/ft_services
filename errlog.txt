@@ -1,2 +1,0 @@
-Cannot connect to the Docker daemon at tcp://192.168.99.101:2376. Is the docker daemon running?
-Cannot connect to the Docker daemon at tcp://192.168.99.101:2376. Is the docker daemon running?
