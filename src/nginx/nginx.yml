@@ -1,21 +1,50 @@
+# ---------- Deployment ---------- #
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  creationTimestamp: null
   labels:
     app: nginx
+  name: nginx
 spec:
-  strategy:
-    type: Recreate
+  replicas: 1
   selector:
     matchLabels:
       app: nginx
+  strategy: {}
   template:
     metadata:
+      creationTimestamp: null
       labels:
         app: nginx
     spec:
       containers:
-      - name: nginx
-        image: nginx_alpine
+      - image: nginx-alpine
+        name: nginx-alpine
         imagePullPolicy: Never
+        resources: {}
+status: {}
+
+---
+
+# ---------- Service ---------- #
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+  - name: https
+    port: 443
+    targetPort: 443
+  selector:
+    app: nginx
+  type: LoadBalancer
+status:
+  loadBalancer: {}

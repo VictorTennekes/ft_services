@@ -1,19 +1,25 @@
 FROM alpine:3.7
 
-MAINTAINER Victor Tennekes
+LABEL maintainer vtenneke
 
-RUN	apk update && \
-	apk upgrade && \
-	#apk add openssh
-	#apk add supervisor
-	apk add nginx
+RUN	apk update --no-cache && \
+	apk upgrade --no-cache && \
+	apk add --no-cache openssl && \
+	apk add --no-cache nginx
 
-RUN adduser --disabled-password -g 'Nginx www user' - /home/www/ nginx_admin
+# RUN adduser --disabled-password -g 'Nginx www user' - /home/www/ nginx_admin
 
-COPY srcs/nginx/nginx.conf /etc/nginx/conf.d/default.conf
-COPY srcs/nginx/nginx.cert /etc/ssl/localhost.cert
-COPY srcs/nginx/nginx.key /etc/ssl/localhost.key
+RUN adduser -D -g 'www' www && \
+	mkdir /www && \
+	chown -R www:www /var/lib/nginx && \
+	chown -R www:www /www & \
+	mkdir -p /var/run/nginx
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY UVA-Homepage/index.html /www/index.html
+COPY nginx.cert /etc/ssl/localhost.cert
+COPY nginx.key /etc/ssl/localhost.key
 
 EXPOSE 80 443 22
 
-CMD /usr/sbin/nginx -g "daemon off;"
+CMD nginx -g "daemon off;"
