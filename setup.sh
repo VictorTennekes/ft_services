@@ -9,12 +9,16 @@ MAGENTA=$'\e[1;35m'
 CYAN=$'\e[1;36m'
 END=$'\e[0m'
 
-
 # ---------- Modular function for starting apps ---------- #
 # $1 = name, $2 = docker-location, $3 = yml-location
 start_app () {
 	printf "$1: "
-	docker build -t $1 $2 > /dev/null 2>>errlog.txt && kubectl apply -f $3 > /dev/null 2>>errlog.txt
+	if [ "$4" == "--debug" ]
+	then
+		docker build -t $1 $2 && kubectl apply -f $3
+	else
+		docker build -t $1 $2 > /dev/null 2>>errlog.txt && kubectl apply -f $3 > /dev/null 2>>errlog.txt
+	fi
     RET=$?
 	if [ $RET -eq 1 ]
 	then
@@ -23,6 +27,14 @@ start_app () {
 		echo "[${GREEN}OK${END}]"
 	fi
 }
+
+# ---------- Setting debug ---------- #
+DEBUG=$""
+if [ $# -eq 1 ]
+then
+    DEBUG="--debug"
+fi
+
 # ---------- Cleanup ---------- #
 #rm -rf ~/.minikube
 #mkdir -p ~/goinfre/.minikube
@@ -47,4 +59,5 @@ eval $(minikube docker-env)
 export MINIKUBE_IP=$(minikube ip)
 
 kubectl apply -f ./src/metallb/config.yml
-start_app "nginx-alpine" "./src/nginx" "./src/nginx/nginx.yml"
+start_app "nginx-alpine" "./src/nginx" "./src/nginx/nginx.yml" $DEBUG
+start_app "ftps-alpine" "./src/ftps" "./src/ftps/src/ftps.yml" $DEBUG
