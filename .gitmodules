@@ -1,0 +1,3 @@
+[submodule "src/nginc/UVA-Homepage"]
+	path = src/nginc/UVA-Homepage
+	url = https://github.com/VictorTennekes/UVA-Homepage
