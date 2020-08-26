@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wordpress-pv-claim
+  labels:
+    app: wordpress
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress-svc
+  annotations:
+    metallb.universe.tf/address-pool: wp-ip
+  labels:
+    app: wordpress-deployment
+spec:
+  type: LoadBalancer
+  selector:
+    app: wordpress-deployment
+  ports:
+  - name: wordpress-port
+    port: 5050
+    targetPort: 5050
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-deployment
+  labels:
+    app: wordpress-deployment
+spec:
+  selector:
+    matchLabels:
+      app: wordpress-deployment
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: wordpress-deployment
+    spec:
+      containers:
+      - name: wordpress
+        image: wordpress
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: DB_NAME
+          value: wordpress
+        - name: DB_USER
+          value: mysql
+        - name: DB_PASS
+          value: pass
+        - name: DB_HOST
+          value: mysql
+        ports:
+          - containerPort: 5050
+        volumeMounts:
+        - name: wordpress-persistent-storage
+          mountPath: /www
+      volumes:
+      - name: wordpress-persistent-storage
+        persistentVolumeClaim:
+          claimName: wordpress-pv-claim
