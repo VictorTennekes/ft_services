@@ -39,7 +39,7 @@ spec:
           value: wordpress
         - name: DB_USER
           value: mysql
-        - name: DB_PASS
+        - name: DB_PASSWORD
           value: pass
         - name: MYSQL_HOME
           value: "/etc/"
