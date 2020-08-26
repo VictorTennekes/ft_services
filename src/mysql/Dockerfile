@@ -1,12 +1,11 @@
 FROM alpine:3.12
 
-LABEL maintaner vtenneke
+RUN	apk add mysql mysql-client
 
-RUN apk add --no-cache mysql mysql-client
+COPY ./srcs/startup.sh /tmp/startup.sh
+COPY ./srcs/my.cnf /etc/
 
-COPY start.sh /tmp/start.sh
-RUN chmod +x /tmp/start.sh
-COPY my.cnf /etc/
+RUN chmod +x /tmp/startup.sh
 VOLUME /var/lib/mysql
 
-ENTRYPOINT [ "/bin/sh", "/tmp/start.sh" ]
+ENTRYPOINT ["/bin/sh", "/tmp/startup.sh"]

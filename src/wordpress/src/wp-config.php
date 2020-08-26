@@ -7,7 +7,7 @@ define( 'DB_NAME', '${DB_NAME}' );
 define( 'DB_USER', '${DB_USER}' );
 
 /** MySQL database password */
-define( 'DB_PASSWORD', '${DB_PASSWORD}');
+define( 'DB_PASSWORD', '${DB_PASS}');
 
 /** MySQL hostname */
 define( 'DB_HOST', '${DB_HOST}' );

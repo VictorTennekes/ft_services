@@ -54,7 +54,7 @@ spec:
           value: wordpress
         - name: DB_USER
           value: mysql
-        - name: WORD
+        - name: DB_PASS
           value: pass
         - name: DB_HOST
           value: mysql
