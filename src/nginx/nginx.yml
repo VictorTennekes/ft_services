@@ -19,8 +19,8 @@ spec:
         app: nginx
     spec:
       containers:
-      - image: nginx-alpine
-        name: nginx-alpine
+      - image: nginx
+        name: nginx
         imagePullPolicy: Never
         resources: {}
 status: {}

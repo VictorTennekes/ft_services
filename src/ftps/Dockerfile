@@ -10,8 +10,7 @@ COPY src/vsftpd.conf /etc/vsftpd/vsftpd.conf
 COPY src/ftps.cert /etc/ssl/certs/ftps.cert
 COPY src/ftps.key /etc/ssl/certs/ftps.key
 
-RUN mkdir -p /var/ftp && \
-	adduser -D -h /var/ftp ftps_user && \
+RUN adduser -D -h /var/ftp ftps_user && \
 	echo "ftps_user:pass" | chpasswd
 
 # 20 Command control

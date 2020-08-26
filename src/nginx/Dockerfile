@@ -4,10 +4,7 @@ LABEL maintainer vtenneke
 
 RUN	apk update --no-cache && \
 	apk upgrade --no-cache && \
-	apk add --no-cache openssl && \
 	apk add --no-cache nginx
-
-# RUN adduser --disabled-password -g 'Nginx www user' - /home/www/ nginx_admin
 
 RUN adduser -D -g 'www' www && \
 	mkdir /www && \

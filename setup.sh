@@ -41,8 +41,6 @@ fi
 #ln -s ~/goinfre/.minikube ~/.minikube
 
 :> errlog.txt
-:> log.log
-#sh cleanup.sh >> log.log 2>> /dev/null
 
 # ---------- Cluster start ---------- #
 minikube start --driver=virtualbox \
@@ -59,5 +57,5 @@ eval $(minikube docker-env)
 export MINIKUBE_IP=$(minikube ip)
 
 kubectl apply -f ./src/metallb/config.yml
-start_app "nginx-alpine" "./src/nginx" "./src/nginx/nginx.yml" $DEBUG
-start_app "ftps-alpine" "./src/ftps" "./src/ftps/src/ftps.yml" $DEBUG
+start_app "nginx" "./src/nginx" "./src/nginx/nginx.yml" $DEBUG
+start_app "ftps" "./src/ftps" "./src/ftps/src/ftps.yml" $DEBUG

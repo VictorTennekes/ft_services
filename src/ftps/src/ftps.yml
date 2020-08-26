@@ -19,8 +19,8 @@ spec:
         app: ftps
     spec:
       containers:
-      - image: ftps-alpine
-        name: ftps-alpine
+      - image: ftps
+        name: ftps
         ports:
           - containerPort: 20
           - containerPort: 21
@@ -40,7 +40,7 @@ metadata:
     metallb.universe.tf/address-pool: ftps-ip
   labels:
     app: ftps
-    name: ftps
+  name: ftps
 spec:
   ports:
     - name: command-ctrl
