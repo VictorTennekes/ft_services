@@ -57,7 +57,7 @@ spec:
         - name: DB_PASS
           value: pass
         - name: DB_HOST
-          value: mysql
+          value: mysql-svc
         ports:
           - containerPort: 5050
         volumeMounts:

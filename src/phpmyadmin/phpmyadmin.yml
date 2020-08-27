@@ -36,7 +36,7 @@ spec:
         imagePullPolicy: IfNotPresent
         env:
         - name: DB_HOST
-          value: mysql
+          value: mysql-svc
         ports:
         - containerPort: 5000
         volumeMounts:

@@ -7,6 +7,7 @@ RUN apk update && \
 RUN	apk add supervisor
 
 RUN mkdir -p /run/nginx
+RUN mkdir -p /tmp
 
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/5.0.1/phpMyAdmin-5.0.1-english.tar.gz && \
 	tar -xzvf phpMyAdmin-5.0.1-english.tar.gz --strip-components=1 -C /www && \
@@ -18,11 +19,11 @@ COPY ./src/config.inc.php /tmp
 COPY ./src/nginx.conf /etc/nginx/nginx.conf
 COPY ./src/nginx.conf /etc/nginx.conf
 COPY ./src/supervisord.conf /etc/supervisord.conf
-COPY ./src/setup.sh .
+COPY ./src/setup.sh /tmp
 
 # Make sure that our ssh daemon keeps restarting
 
-RUN chmod +x setup.sh
+RUN chmod +x tmp/setup.sh
 
 EXPOSE 5000
 
