@@ -1,0 +1,137 @@
+body {
+    font: 20px JetBrains Mono, sans-serif;
+    line-height: 1.8;
+    color: black;
+  }
+
+  /* * {
+    border: solid;
+    border-radius: 1px;
+  } */
+
+  
+  /* My class and id and further css  */
+  
+  #head {
+    text-align: center !important;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: black
+  }
+  
+  .text {
+    font-size: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .Content {
+    text-align: left;
+    color: darkgrey;
+    /* padding-left: 35%; */
+  }
+
+  .nav {
+    justify-content-left
+  }
+
+  .pf-pic {
+    width: 150px;
+    height: auto;
+    float: right;
+  }
+  
+  @media only screen and (min-width: 828px) {
+    
+    .text {
+      font-size: 17px;
+    }
+
+    .Content {
+      padding-left: 0px;
+    }
+
+    .pf-pic {
+      width: 300px;
+    }
+
+  }
+
+  
+  .space {
+    margin:0;
+    padding:0;
+    height:50px;
+  }
+
+  .nav-link {
+    color: grey;
+  }
+
+  a:hover {
+    color: black;
+  }
+
+  #content {
+    height: 1000px;
+    padding-bottom:60px;
+  }
+
+ .active {
+   color: black;
+   text-decoration: underline;
+  }
+
+ .footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  background: fixed;
+  background-color: white;
+  } 
+
+  /* End of my class and id and further css*/
+
+  .margin {margin-bottom: 45px;}
+
+  .bg-1 { 
+    background-color: #1abc9c; /* Green */
+    color: #ffffff;
+  }
+
+  .bg-2 { 
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
+  }
+
+  .bg-3 { 
+    background-color: #ffffff; /* White */
+    color: #555555;
+  }
+
+  .bg-4 { 
+    background-color: #2f2f2f; /* Black Gray */
+    color: #fff;
+  }
+
+  .container-fluid {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+  }
+  
+  .navbar-nav  li a:hover {
+    color: #1abc9c !important;
+  }

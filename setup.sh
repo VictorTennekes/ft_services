@@ -58,7 +58,7 @@ export MINIKUBE_IP=$(minikube ip)
 
 kubectl apply -f ./src/metallb/config.yml
 start_app "nginx" "./src/nginx" "./src/nginx/nginx.yml" $DEBUG
-start_app "ftps" "./src/ftps" "./src/ftps/src/ftps.yml" $DEBUG
+start_app "ftps" "./src/ftps" "./src/ftps/ftps.yml" $DEBUG
 start_app "mysql" "./src/mysql" "./src/mysql/mysql.yml" $DEBUG
 start_app "wordpress" "./src/wordpress" "./src/wordpress/wordpress.yml" $DEBUG
 start_app "phpmyadmin" "./src/phpmyadmin" "./src/phpmyadmin/phpmyadmin.yml" "$DEBUG"

@@ -34,6 +34,9 @@ spec:
       - name: phpmyadmin
         image: phpmyadmin
         imagePullPolicy: IfNotPresent
+        env:
+        - name: DB_HOST
+          value: mysql
         ports:
         - containerPort: 5000
         volumeMounts:

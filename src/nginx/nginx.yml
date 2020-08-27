@@ -34,7 +34,7 @@ metadata:
   creationTimestamp: null
   labels:
     app: nginx
-  name: nginx
+  name: nginx-svc
 spec:
   ports:
   - name: http

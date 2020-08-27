@@ -40,7 +40,7 @@ metadata:
     metallb.universe.tf/address-pool: ftps-ip
   labels:
     app: ftps
-  name: ftps
+  name: ftps-svc
 spec:
   ports:
     - name: command-ctrl

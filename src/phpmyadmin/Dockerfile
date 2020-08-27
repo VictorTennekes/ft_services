@@ -14,7 +14,7 @@ RUN wget https://files.phpmyadmin.net/phpMyAdmin/5.0.1/phpMyAdmin-5.0.1-english.
 
 RUN adduser -D -g 'www' www
 
-COPY ./src/config.inc.php /www
+COPY ./src/config.inc.php /tmp
 COPY ./src/nginx.conf /etc/nginx/nginx.conf
 COPY ./src/nginx.conf /etc/nginx.conf
 COPY ./src/supervisord.conf /etc/supervisord.conf
@@ -26,4 +26,4 @@ RUN chmod +x setup.sh
 
 EXPOSE 5000
 
-CMD [ "sh", "-c", "/tmp/start.sh ; /usr/bin/supervisord -c /etc/supervisord.conf" ]
+CMD [ "sh", "-c", "/tmp/setup.sh ; /usr/bin/supervisord -c /etc/supervisord.conf" ]
