@@ -3,6 +3,8 @@ mysql_install_db --user=mysql --ldata=/var/lib/mysql
 # allow local dbg
 
 :> /tmp/sql
+cat /tmp/create_tables.sql >> /tmp/sql
+echo "" >> /tmp/sql
 # allow external connections
 echo "Ik maak nu Database $DB_NAME aan. poggers"
 echo "CREATE DATABASE IF NOT EXISTS $DB_NAME CHARACTER SET utf8 COLLATE utf8_general_ci;" >> /tmp/sql
