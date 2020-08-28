@@ -1,3 +1,4 @@
+# ---------- Service ---------- #
 kind: Service
 apiVersion: v1
 metadata:
@@ -13,6 +14,8 @@ spec:
     port: 3306
 
 ---
+
+# ---------- Deployment ---------- #
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -52,6 +55,8 @@ spec:
           claimName: mysql-pv-claim
 
 ---
+
+# ---------- Persistent Volume Claim ---------- #
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:

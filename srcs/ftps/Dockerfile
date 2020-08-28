@@ -6,9 +6,9 @@ RUN apk update --no-cache && \
 	apk upgrade --no-cache && \
 	apk add --no-cache vsftpd
 
-COPY src/vsftpd.conf /etc/vsftpd/vsftpd.conf
-COPY src/ftps.cert /etc/ssl/certs/ftps.cert
-COPY src/ftps.key /etc/ssl/certs/ftps.key
+COPY srcs/vsftpd.conf /etc/vsftpd/vsftpd.conf
+COPY srcs/ftps.cert /etc/ssl/certs/ftps.cert
+COPY srcs/ftps.key /etc/ssl/certs/ftps.key
 
 RUN adduser -D -h /var/ftp ftps_user && \
 	echo "ftps_user:pass" | chpasswd

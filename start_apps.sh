@@ -42,16 +42,6 @@ fi
 
 :> errlog.txt
 
-# ---------- Cluster start ---------- #
-minikube start --driver=virtualbox \
-				--cpus=2 --memory=2048 --disk-size=10g \
-				--addons metallb \
-				--addons default-storageclass \
-				--addons dashboard \
-				--addons storage-provisioner \
-				--addons metrics-server \
-				--extra-config=kubelet.authentication-token-webhook=true
-
 # ---------- Build and deploy ---------- #
 eval $(minikube docker-env)
 export MINIKUBE_IP=$(minikube ip)

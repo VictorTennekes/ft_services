@@ -12,10 +12,10 @@ RUN adduser -D -g 'www' www && \
 	chown -R www:www /www & \
 	mkdir -p /var/run/nginx
 
-COPY src/nginx.conf /etc/nginx/conf.d/default.conf
-COPY src/UVA-Homepage/index.html /www/index.html
-COPY src/nginx.cert /etc/ssl/localhost.cert
-COPY src/nginx.key /etc/ssl/localhost.key
+COPY srcs/nginx.conf /etc/nginx/conf.d/default.conf
+COPY srcs/UVA-Homepage/index.html /www/index.html
+COPY srcs/nginx.cert /etc/ssl/localhost.cert
+COPY srcs/nginx.key /etc/ssl/localhost.key
 
 EXPOSE 80 443 22
 

@@ -1,3 +1,32 @@
+# ---------- Service ---------- #
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  annotations:
+    metallb.universe.tf/address-pool: ftps-ip
+  labels:
+    app: ftps
+  name: ftps-svc
+spec:
+  ports:
+    - name: command-ctrl
+      port: 20
+      targetPort: 20
+    - name: data-transfer
+      port: 21
+      targetPort: 21
+    - name: pasv-port
+      port: 30000
+      targetPort: 30000
+  selector:
+    app: ftps
+  type: LoadBalancer
+status:
+  loadBalancer: {}
+
+---
+
 # ---------- Deployment ---------- #
 apiVersion: apps/v1
 kind: Deployment
@@ -28,32 +57,3 @@ spec:
         imagePullPolicy: Never
         resources: {}
 status: {}
-
----
-
-# ---------- Service ---------- #
-apiVersion: v1
-kind: Service
-metadata:
-  creationTimestamp: null
-  annotations:
-    metallb.universe.tf/address-pool: ftps-ip
-  labels:
-    app: ftps
-  name: ftps-svc
-spec:
-  ports:
-    - name: command-ctrl
-      port: 20
-      targetPort: 20
-    - name: data-transfer
-      port: 21
-      targetPort: 21
-    - name: pasv-port
-      port: 30000
-      targetPort: 30000
-  selector:
-    app: ftps
-  type: LoadBalancer
-status:
-  loadBalancer: {}

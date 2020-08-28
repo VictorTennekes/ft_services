@@ -1,3 +1,4 @@
+# ---------- Service ---------- #
 apiVersion: v1
 kind: Service
 metadata:
@@ -16,6 +17,7 @@ spec:
 
 ---
 
+# ---------- Deployment ---------- #
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -48,6 +50,8 @@ spec:
           claimName: phpmyadmin-pv-claim
 
 ---
+
+# ---------- Persistent Volume Claim ---------- #
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:

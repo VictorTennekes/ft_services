@@ -13,11 +13,11 @@ RUN apk add nginx
 RUN adduser -D -g 'www' www
 RUN mkdir /www
 
-COPY ./src/wp-config.php /tmp/wp-config.php
-COPY ./src/wpinstall.sh /tmp/wpinstall.sh
-COPY ./src/nginx.conf /etc/nginx/nginx.conf
-COPY ./src/supervisord.conf /etc/supervisord.conf
-COPY ./src/start.sh /tmp/start.sh
+COPY ./srcs/wp-config.php /tmp/wp-config.php
+COPY ./srcs/wpinstall.sh /tmp/wpinstall.sh
+COPY ./srcs/nginx.conf /etc/nginx/nginx.conf
+COPY ./srcs/supervisord.conf /etc/supervisord.conf
+COPY ./srcs/start.sh /tmp/start.sh
 
 # Make sure that our ssh daemon keeps restarting
 RUN	apk add supervisor

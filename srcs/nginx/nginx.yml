@@ -1,3 +1,27 @@
+# ---------- Service ---------- #
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nginx
+  name: nginx-svc
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+  - name: https
+    port: 443
+    targetPort: 443
+  selector:
+    app: nginx
+  type: LoadBalancer
+status:
+  loadBalancer: {}
+
+---
+
 # ---------- Deployment ---------- #
 apiVersion: apps/v1
 kind: Deployment
@@ -24,27 +48,3 @@ spec:
         imagePullPolicy: Never
         resources: {}
 status: {}
-
----
-
-# ---------- Service ---------- #
-apiVersion: v1
-kind: Service
-metadata:
-  creationTimestamp: null
-  labels:
-    app: nginx
-  name: nginx-svc
-spec:
-  ports:
-  - name: http
-    port: 80
-    targetPort: 80
-  - name: https
-    port: 443
-    targetPort: 443
-  selector:
-    app: nginx
-  type: LoadBalancer
-status:
-  loadBalancer: {}

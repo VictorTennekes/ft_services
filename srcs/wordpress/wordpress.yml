@@ -1,16 +1,4 @@
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: wordpress-pv-claim
-  labels:
-    app: wordpress
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
----
+# ---------- Service ---------- #
 apiVersion: v1
 kind: Service
 metadata:
@@ -27,7 +15,10 @@ spec:
   - name: wordpress-port
     port: 5050
     targetPort: 5050
+
 ---
+
+# ---------- Deployment ---------- #
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -67,3 +58,19 @@ spec:
       - name: wordpress-persistent-storage
         persistentVolumeClaim:
           claimName: wordpress-pv-claim
+
+---
+
+# ---------- Persistent Volume Claim ---------- #
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wordpress-pv-claim
+  labels:
+    app: wordpress
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
