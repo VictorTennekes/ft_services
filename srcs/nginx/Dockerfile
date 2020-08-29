@@ -1,6 +1,6 @@
 FROM alpine:3.12
 
-LABEL maintainer vtenneke
+LABEL maintainer pde-bakk
 
 RUN	apk update --no-cache && \
 	apk upgrade --no-cache && \
