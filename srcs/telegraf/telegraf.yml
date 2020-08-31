@@ -1,0 +1,129 @@
+# ---------- Config ---------- #
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: telegraf-conf
+data:
+  telegraf.conf: |+
+    [agent]
+      interval = "10s"
+      round_interval = true
+      metric_batch_size = 1000
+      metric_buffer_limit = 10000
+      collection_jitter = "0s"
+      flush_interval = "30s"
+      flush_jitter = "0s"
+      hostname = ""
+      omit_hostname = false
+    [[outputs.influxdb]]
+      urls = ["${INFLUX_URL}"]
+      database = "telegraf"
+      skip_database_creation = false
+      timeout = "5s"
+      username = "${INFLUX_USER}"
+      password = "${INFLUX_PASSWORD}"
+      user_agent = "telegraf"
+    [[inputs.kube_inventory]]
+      namespace = "default"
+      url = "https://kubernetes.default.svc:443/"
+      bearer_token = "/var/run/secrets/kubernetes.io/serviceaccount/token"
+      resource_include = [ "deployments" ]
+      tls_ca = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+      insecure_skip_verify = false
+
+---
+
+  # ---------- Secret ---------- #
+apiVersion: v1
+kind: Secret
+metadata:
+  name: influx-secret
+type: Opaque
+stringData:
+  INFLUX_URL: http://influxdb-svc:8086
+  INFLUX_USER: user
+  INFLUX_PASSWORD: pass
+
+---
+
+# ---------- Deployment ---------- #
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: telegraf
+  name: telegraf-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: telegraf
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: telegraf
+    spec:
+      serviceAccount: telegraf-acc
+      volumes:
+      - name: telegraf-conf-vol
+        configMap:
+          name: telegraf-conf
+      containers:
+      - image: telegraf
+        name: telegraf-pod
+        imagePullPolicy: Never
+        envFrom:
+          - secretRef:
+              name: influx-secret
+        resources: {}
+        volumeMounts:
+        - name: telegraf-conf-vol
+          mountPath: /etc/telegraf/telegraf.conf
+          subPath: telegraf.conf
+          readOnly: true
+status: {}
+
+---
+
+# ---------- ServiceAccount ---------- #
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: telegraf-acc
+
+---
+
+# ---------- Role(Binding) ---------- #
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  creationTimestamp: null
+  name: telegraf-permissions
+rules:
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - get
+  - list
+  - watch
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  creationTimestamp: null
+  name: telegraf-rbind
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: telegraf-permissions
+subjects:
+- kind: ServiceAccount
+  name: telegraf-acc
+  namespace: default

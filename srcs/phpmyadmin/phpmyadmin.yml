@@ -35,7 +35,7 @@ spec:
       containers:
       - name: phpmyadmin
         image: phpmyadmin
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Never
         env:
         - name: DB_HOST
           value: mysql-svc

@@ -1,64 +1,69 @@
-# ---------- Service ---------- #
-apiVersion: v1
-kind: Service
-metadata:
-  name: influxdb-svc
-  labels:
-    app: influxdb-app
-spec:
-  ports:
-  - port: 8086
-    protocol: TCP
-    name: http
-  selector:
-    app: influxdb-app
-
----
-
 # ---------- Deployment ---------- #
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: influxdb-deployment
   labels:
-    app: influxdb-app
+    app: influxdb
+  name: influxdb-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: influxdb-app
+      app: influxdb
+  strategy: {}
   template:
     metadata:
       labels:
-        app: influxdb-app
+        app: influxdb
     spec:
       containers:
-      - name: influxdb
-        image: influxdb
-        ports:
-        - containerPort: 8086
+      - image: influxdb
         imagePullPolicy: Never
+        name: influxdb
+        resources: {}
         volumeMounts:
         - name: influxdb-persistent-storage
           mountPath: /var/lib/influxdb
       volumes:
       - name: influxdb-persistent-storage
         persistentVolumeClaim:
-		  claimName: influxdb-pv-claim
-		  
+          claimName: influx-claim
+status: {}
+
+---
+
+# ---------- Service ---------- #
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: influxdb
+  name: influxdb-svc
+spec:
+  ports:
+  - name: 8086-8086
+    port: 8086
+    protocol: TCP
+    targetPort: 8086
+  selector:
+    app: influxdb
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
 ---
 
 # ---------- Persistent Volume(Claim) ---------- #
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: influxdb-pv-volume
+  name: influx-volume
   labels:
     type: local
 spec:
   storageClassName: manual
   capacity:
-    storage: 2Gi
+    storage: 1Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
@@ -69,13 +74,11 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: influxdb-pv-claim
-  labels:
-    app: influxdb-app
+  name: influx-claim
 spec:
   storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi
+      storage: 1Gi

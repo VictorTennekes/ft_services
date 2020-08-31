@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: grafana
+  name: grafana-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+      - image: grafana
+        name: grafana
+        imagePullPolicy: Never
+        envFrom:
+        - secretRef:
+            name: influx-secret
+        - secretRef:
+            name: grafana-secret
+        env:
+        - name: HOSTNAME
+          value: http://grafana-svc:3000
+        resources: {}
+status: {}
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+    name: grafana-secret
+type: Opaque
+stringData:
+    GF_SECURITY_ADMIN_USER: user
+    GF_SECURITY_ADMIN_PASSWORD: pass
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: grafana
+  name: grafana-svc
+spec:
+  ports:
+  - name: grafana
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: grafana
+  type: LoadBalancer
+status:
+  loadBalancer: {}

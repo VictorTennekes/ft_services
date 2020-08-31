@@ -53,3 +53,5 @@ start_app "mysql" "./srcs/mysql" "./srcs/mysql/mysql.yml" $DEBUG
 start_app "wordpress" "./srcs/wordpress" "./srcs/wordpress/wordpress.yml" $DEBUG
 start_app "phpmyadmin" "./srcs/phpmyadmin" "./srcs/phpmyadmin/phpmyadmin.yml" "$DEBUG"
 start_app "influxdb" "./srcs/influxdb" "./srcs/influxdb/influxdb.yml" "$DEBUG"
+start_app "telegraf" "./srcs/telegraf" "./srcs/telegraf/telegraf.yml" "$DEBUG"
+start_app "grafana" "./srcs/grafana" "./srcs/grafana/grafana.yml" "$DEBUG"
