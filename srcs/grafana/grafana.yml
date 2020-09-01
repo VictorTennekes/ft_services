@@ -38,8 +38,12 @@ metadata:
     name: grafana-secret
 type: Opaque
 stringData:
-    GF_SECURITY_ADMIN_USER: user
+    GF_SECURITY_ADMIN_USER: admin
     GF_SECURITY_ADMIN_PASSWORD: pass
+    GF_SERVER_DOMAIN: grafana-svc
+    GF_SERVER_HTTP_PORT: "3000"
+    GF_SERVER_PROTOCOL: http
+    GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /usr/share/grafana/conf/provisioning/dashboards/mine/overview.json
 
 ---
 

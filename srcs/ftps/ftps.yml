@@ -50,10 +50,6 @@ spec:
       containers:
       - image: ftps
         name: ftps
-        ports:
-          - containerPort: 20
-          - containerPort: 21
-          - containerPort: 30000
         imagePullPolicy: Never
         resources: {}
 status: {}
