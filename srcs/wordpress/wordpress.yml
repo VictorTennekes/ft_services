@@ -41,7 +41,21 @@ spec:
         image: wordpress
         imagePullPolicy: IfNotPresent
         envFrom:
-          - secretRef:
-              name: mysql-secret
+        - secretRef:
+            name: mysql-secret
+        - secretRef:
+            name: wordpress-secret
         ports:
           - containerPort: 5050
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: wordpress-secret
+type: Opaque
+stringData:
+  WP_TITLE: Wordpress
+  WP_USER: admin
+  WP_PASSWORD: pass

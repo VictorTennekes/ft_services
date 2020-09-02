@@ -36,10 +36,10 @@ spec:
       containers:
       - name: mysql
         image: mysql
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Never
         envFrom:
-          - secretRef:
-              name: mysql-secret
+        - secretRef:
+            name: mysql-secret
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
@@ -60,8 +60,8 @@ stringData:
   DB_USER: mysql
   DB_PASSWORD: pass
   DB_HOST: mysql-svc
-  MYSQL_HOME: "/etc/"
-  
+  MYSQL_HOME: /etc/
+
 ---
 
 # ---------- Persistent Volume Claim ---------- #

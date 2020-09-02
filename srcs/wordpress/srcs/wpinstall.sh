@@ -3,7 +3,7 @@ cd /www
 wp core is-installed
 if [ $? == 1 ]; then
     wp core download
-    wp core install --url=wordpress/ --path=/www --title="Wordpress" --admin_user="admin" --admin_password="pass" --admin_email=admin@system.com --skip-email
+    wp core install --url=wordpress/ --path=/www --title="$WP_TITLE" --admin_user="$WP_USER" --admin_password="$WP_PASSWORD" --admin_email=admin@system.com --skip-email
     wp term create category Test
     wp post create --post_author=admin --post_category="Test" --post-title="Test Title" --post-content="yeet" --post_excerpt=tag --post_status=publish | awk '{gsub(/[.]/, ""); print $4}' > /tmp/postid
 

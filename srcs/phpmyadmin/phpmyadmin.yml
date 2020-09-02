@@ -36,31 +36,9 @@ spec:
       - name: phpmyadmin
         image: phpmyadmin
         imagePullPolicy: Never
-        env:
-        - name: DB_HOST
-          value: mysql-svc
+        envFrom:
+        - secretRef:
+            name: mysql-secret
         ports:
         - containerPort: 5000
         volumeMounts:
-        - name: phpmyadmin-persistent-storage
-          mountPath: /var/www/localhost/htdocs
-      volumes:
-      - name: phpmyadmin-persistent-storage
-        persistentVolumeClaim:
-          claimName: phpmyadmin-pv-claim
-
----
-
-# ---------- Persistent Volume Claim ---------- #
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: phpmyadmin-pv-claim
-  labels:
-    app: phpmyadmin-deployment
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi

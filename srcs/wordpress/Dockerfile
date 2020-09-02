@@ -21,6 +21,7 @@ COPY ./srcs/start.sh /tmp/start.sh
 
 # Make sure that our ssh daemon keeps restarting
 RUN	apk add supervisor
+RUN sed -i 's/;daemonize = yes/daemonize = no/g' /etc/php7/php-fpm.conf
 
 # Here we go again
 RUN chmod +x /tmp/wpinstall.sh

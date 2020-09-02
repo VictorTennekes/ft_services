@@ -24,6 +24,7 @@ COPY ./srcs/setup.sh /tmp
 # Make sure that our ssh daemon keeps restarting
 
 RUN chmod +x tmp/setup.sh
+RUN sed -i 's/;daemonize = yes/daemonize = no/g' /etc/php7/php-fpm.conf
 
 EXPOSE 5000
 
