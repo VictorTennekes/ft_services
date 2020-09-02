@@ -37,15 +37,9 @@ spec:
       - name: mysql
         image: mysql
         imagePullPolicy: IfNotPresent
-        env:
-        - name: DB_NAME
-          value: wordpress
-        - name: DB_USER
-          value: mysql
-        - name: DB_PASS
-          value: pass
-        - name: MYSQL_HOME
-          value: "/etc/"
+        envFrom:
+          - secretRef:
+              name: mysql-secret
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
@@ -54,6 +48,20 @@ spec:
         persistentVolumeClaim:
           claimName: mysql-pv-claim
 
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secret
+type: Opaque
+stringData:
+  DB_NAME: wordpress
+  DB_USER: mysql
+  DB_PASSWORD: pass
+  DB_HOST: mysql-svc
+  MYSQL_HOME: "/etc/"
+  
 ---
 
 # ---------- Persistent Volume Claim ---------- #
