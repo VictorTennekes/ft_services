@@ -12,8 +12,8 @@ define( 'DB_PASSWORD', '${DB_PASSWORD}' );
 /** MySQL hostname */
 define( 'DB_HOST', '${DB_HOST}' );
 
-define('WP_HOME', 'http://192.168.99.202:5050' );
-define('WP_SITEURL', 'http://192.168.99.202:5050' );
+define('WP_HOME', 'http://${WPSVC_IP}:5050' );
+define('WP_SITEURL', 'http://${WPSVC_IP}:5050' );
 // define('WP_HOME', 'http://wordpress-svc:5050' );
 // define('WP_SITEURL', 'http://wordpress-svc:5050' );
 

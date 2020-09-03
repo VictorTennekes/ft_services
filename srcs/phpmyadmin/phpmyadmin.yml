@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: phpmyadmin-svc
   annotations:
-    metallb.universe.tf/address-pool: pma-ip
+    metallb.universe.tf/address-pool: default
   labels:
     app: phpmyadmin-deployment
 spec:

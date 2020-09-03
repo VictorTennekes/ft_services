@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: wordpress-svc
   annotations:
-    metallb.universe.tf/address-pool: wp-ip
+    metallb.universe.tf/address-pool: default
   labels:
     app: wordpress-deployment
 spec:

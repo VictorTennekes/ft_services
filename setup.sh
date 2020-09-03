@@ -57,6 +57,7 @@ eval $(minikube docker-env)
 export MINIKUBE_IP=$(minikube ip)
 
 kubectl apply -f ./srcs/metallb/config.yml
+kubectl apply -f ./srcs/read_service_permissions.yml
 start_app "nginx" "./srcs/nginx" "./srcs/nginx/nginx.yml" $DEBUG
 start_app "ftps" "./srcs/ftps" "./srcs/ftps/ftps.yml" $DEBUG
 start_app "mysql" "./srcs/mysql" "./srcs/mysql/mysql.yml" $DEBUG
