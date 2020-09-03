@@ -4,9 +4,9 @@ LABEL maintainer vtenneke
 
 RUN apk update --no-cache && \
 	apk upgrade --no-cache && \
-	apk add grafana --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ && \
-	apk add sed --no-cache && \
-	apk add curl --no-cache
+	apk add grafana --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ \
+	sed \
+	curl
 
 WORKDIR /usr/share/grafana
 

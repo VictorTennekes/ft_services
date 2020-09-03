@@ -53,7 +53,7 @@ metadata:
   creationTimestamp: null
   labels:
     app: telegraf
-  name: telegraf-deployment
+  name: telegraf
 spec:
   replicas: 1
   selector:

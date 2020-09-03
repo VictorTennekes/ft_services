@@ -14,6 +14,9 @@ spec:
   - name: https
     port: 443
     targetPort: 443
+  - name: ssh
+    port: 22
+    targetPort: 22
   selector:
     app: nginx
   type: LoadBalancer
@@ -43,8 +46,30 @@ spec:
         app: nginx
     spec:
       containers:
-      - image: nginx
-        name: nginx
+      - name: nginx
+        image: nginx
         imagePullPolicy: Never
+        envFrom:
+        - secretRef:
+            name: ssh-secret
         resources: {}
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - /tmp/liveness.sh
+          initialDelaySeconds: 10
+          periodSeconds: 5
 status: {}
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ssh-secret
+type: Opaque
+stringData:
+  SSH_USERNAME: user
+  SSH_PASSWORD: pass

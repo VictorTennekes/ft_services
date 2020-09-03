@@ -1,6 +1,10 @@
 FROM alpine:3.12
 
-RUN	apk add mysql mysql-client gettext
+RUN	apk update --no-cache && \
+	apk upgrade --no-cache && \
+	apk add --no-cache mysql \
+	mysql-client \
+	gettext
 
 COPY ./srcs/startup.sh /tmp/startup.sh
 COPY ./srcs/my.cnf /tmp/

@@ -14,8 +14,6 @@ define( 'DB_HOST', '${DB_HOST}' );
 
 define('WP_HOME', 'http://${WPSVC_IP}:5050' );
 define('WP_SITEURL', 'http://${WPSVC_IP}:5050' );
-// define('WP_HOME', 'http://wordpress-svc:5050' );
-// define('WP_SITEURL', 'http://wordpress-svc:5050' );
 
 /** Database Charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );

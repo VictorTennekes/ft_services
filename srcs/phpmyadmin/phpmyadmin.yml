@@ -6,11 +6,11 @@ metadata:
   annotations:
     metallb.universe.tf/address-pool: default
   labels:
-    app: phpmyadmin-deployment
+    app: phpmyadmin
 spec:
   type: LoadBalancer
   selector:
-    app: phpmyadmin-deployment
+    app: phpmyadmin
   ports:
   - port: 5000
     targetPort: 5000
@@ -21,16 +21,16 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: phpmyadmin-deployment
+  name: phpmyadmin
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: phpmyadmin-deployment
+      app: phpmyadmin
   template:
     metadata:
       labels:
-        app: phpmyadmin-deployment
+        app: phpmyadmin
     spec:
       containers:
       - name: phpmyadmin
@@ -41,4 +41,11 @@ spec:
             name: mysql-secret
         ports:
         - containerPort: 5000
-        volumeMounts:
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - /tmp/liveness.sh
+          initialDelaySeconds: 10
+          periodSeconds: 5

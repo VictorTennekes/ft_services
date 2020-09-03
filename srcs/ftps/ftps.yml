@@ -51,5 +51,19 @@ spec:
       - image: ftps
         name: ftps
         imagePullPolicy: Never
+        envFrom:
+        - secretRef:
+            name: ftps-secret
         resources: {}
 status: {}
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ftps-secret
+type: Opaque
+stringData:
+  FTPS_USER: admin
+  FTPS_PASSWORD: pass

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: grafana
-  name: grafana-deployment
+  name: grafana
 spec:
   replicas: 1
   selector:
@@ -24,9 +24,6 @@ spec:
             name: influx-secret
         - secretRef:
             name: grafana-secret
-        env:
-        - name: HOSTNAME
-          value: http://grafana-svc:3000
         resources: {}
 status: {}
 
@@ -44,6 +41,7 @@ stringData:
     GF_SERVER_HTTP_PORT: "3000"
     GF_SERVER_PROTOCOL: http
     GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /usr/share/grafana/conf/provisioning/dashboards/mine/overview.json
+    HOSTNAME: http://grafana-svc:3000
 
 ---
 

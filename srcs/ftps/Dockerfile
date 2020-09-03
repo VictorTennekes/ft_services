@@ -9,13 +9,10 @@ RUN apk update --no-cache && \
 COPY srcs/vsftpd.conf /tmp/vsftpd.conf
 COPY srcs/ftps.cert /etc/ssl/certs/ftps.cert
 COPY srcs/ftps.key /etc/ssl/certs/ftps.key
-COPY ./srcs/setup.sh /tmp
-COPY ./srcs/get_external_ip.sh /tmp
+COPY ./srcs/*.sh /tmp/
 
-RUN chmod +x tmp/setup.sh
-RUN chmod +x /tmp/get_external_ip.sh
-RUN adduser -D -h /var/ftp ftps_user && \
-	echo "ftps_user:pass" | chpasswd
+RUN chmod +x tmp/*.sh
+RUN mkdir -p /var/ftp
 
 # 20 Command control
 # 21 Data transfer
