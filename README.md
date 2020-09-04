@@ -8,9 +8,9 @@ It is also recommended to have at least *8GB* of RAM on your system.
 ## Index
 * [Introduction](#introduction)
 * [Objects](#objects)
-* [Minikube Introduction](#minikube&nbsp;introduction>)
+* [Minikube Introduction](#minikube\ introduction)
 * [Commands](#commands)
-* [Quick Start Guide](#quick&nbsp;start&nbsp;guide)
+* [Quick Start Guide](#quick\ start\ guide)
 
 ## Introduction
 Ft_services consists of setting up an infrastructure of different services using Kubernetes. All the containers of these services should be built using [Alpine Linux](https://www.alpinelinux.org/) for performance reasons. The entire project should build itself with a *setup.sh* file.
