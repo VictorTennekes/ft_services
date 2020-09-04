@@ -1,16 +1,16 @@
 # ft_services
 > :warning:	**DISCLAIMER!**
 
-Ft_services is a demanding and resource intensive project, minikube and its dependencies/componenets can be run on windows, but Linux/Mac OS is recommended.
+Ft_services is a demanding and resource intensive project, minikube and its dependencies/components can be run on windows, but Linux/Mac OS is recommended.
 
 It is also recommended to have at least *8GB* of RAM on your system.
 
 ## Index
 * [Introduction](#introduction)
 * [Objects](#objects)
-* [Minikube Introduction](#minikube%20introduction)
+* [Minikube Introduction](<#minikube introduction>)
 * [Commands](#commands)
-* [Quick Start Guide](#quick%20start%20guide)
+* [Quick Start Guide](<#quick start guide>)
 
 ## Introduction
 Ft_services consists of setting up an infrastructure of different services using Kubernetes. All the containers of these services should be built using [Alpine Linux](https://www.alpinelinux.org/) for performance reasons. The entire project should build itself with a *setup.sh* file.
