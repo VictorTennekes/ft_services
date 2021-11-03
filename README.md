@@ -39,7 +39,7 @@ Information and details of the container we'll be running.<br>
 The image we'll be running on the container, that's refered to by the tag you've given it.<br>
 By default the imagePullPolicy is set to `Always`, since normally you would pull images from a repository, we'll need to override this and set it to `Never`.<br>
 There are many optional settings we can supply aswell, for example:
-- You can mount things on the container, such as persistentvolumes or configmaps.
+- You can mount things to the container, such as persistentvolumes or configmaps.
 - You can add environment variables to the container.
 - You can run probes on the container to check the health or other state related things.
 
@@ -122,7 +122,7 @@ You can also use `--all` instead of `OBJECT_NAME`.
 > :warning: Using `--all` is not recommended with `svc` as `OBJECT` as this will destroy your kubernetes service, which results in the demise of your cluster. You will have to `minikube delete` and rerun `setup.sh`.
 
 ## Quick Start Guide
-1. Create a dockerfile, add the base image with the `FROM` tag and built it with `docker build -t IMAGENAME`.
+1. Create a dockerfile, add the base image with the `FROM` tag and build it with `docker build -t IMAGENAME`.
 2. Google how to install the desired application on *Alpine Linux* and try to run it using `docker run -it IMAGENAME`.
 3. Look up what configuration you would need for your application to run as desired.
 4. [Work](https://www.youtube.com/watch?v=UbxUSsFXYo4).
